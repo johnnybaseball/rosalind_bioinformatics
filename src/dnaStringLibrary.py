@@ -56,3 +56,23 @@ def readStringFromFile(fileNameStr):
     f.close()
    
     return retVal
+
+def dnaToRnaTranscription(dnaStr):
+    try:
+        dnaStr = dnaStr.upper()
+        if not verifyDnaString(dnaStr):
+            raise InvalidDnaString("Invalid dna string, \"{0}\"".format(dnaStr))
+
+        return dnaStr.replace('T','U')
+
+    except AttributeError as e:
+        raise InvalidDnaString("Non string error: " + repr(e))
+
+def verifyDnaString(dnaStr):
+    retVal = True
+    try:
+        countBases(dnaStr)
+    except InvalidDnaString:
+        retVal = False
+
+    return retVal

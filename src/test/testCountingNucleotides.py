@@ -53,4 +53,3 @@ class CountingNucleotidesTestCase(TestCase):
 
         self.assertRaises(dnaStringLibrary.InvalidDnaString, dnaStringLibrary.countBases, testStr)
         
-        
