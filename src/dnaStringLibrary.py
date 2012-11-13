@@ -68,6 +68,25 @@ def dnaToRnaTranscription(dnaStr):
     except AttributeError as e:
         raise InvalidDnaString("Non string error: " + repr(e))
 
+def dnaReverseCompliment(dnaStr):
+    compStr = []
+    try:
+        for char in dnaStr.upper()[::-1]:        
+            if 'A' == char:
+                compStr.append('T')
+            elif 'C' == char:
+                compStr.append('G')
+            elif 'G' == char:
+                compStr.append('C')
+            elif 'T' == char:
+                compStr.append('A')
+            else:
+                raise InvalidDnaString("Invalid DNA string, \"{0}\"".format(dnaStr))
+    except Exception as e:
+        raise InvalidDnaString("Invalid DNA string, \"{0}\"".format(dnaStr))
+
+    return ''.join(compStr)
+
 def verifyDnaString(dnaStr):
     retVal = True
     try:

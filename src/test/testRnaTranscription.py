@@ -17,7 +17,7 @@ def TEST_STR():
 def EXPECTED_STR():
     return "GAUGGAACUUGACUACGUAAAUU"
 
-class RnaTranscriptionTestCase(TestCase):
+class RnaTranscriptionTestClass(TestCase):
 
 
     def testDnaToRnaTranscriptionUpperCase(self):
