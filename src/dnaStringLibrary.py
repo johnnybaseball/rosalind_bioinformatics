@@ -2,7 +2,7 @@
 # dnaStringLibrary.py
 #
 # This file contains a number of functions for manipulating and processing
-# DNA string information.  This library is used to solve problems on the 
+# DNA string information.  This library is used to solve problems on the
 # rosalind website:
 # http://rosalind.info/problems/as-table/
 #
@@ -16,7 +16,7 @@
 #
 #    Redistributions of source code must retain the above copyright notice,
 #    this list of conditions and the following disclaimer.
-#    
+#
 #    Redistributions in binary form must reproduce the above copyright notice,
 #    this list of conditions and the following disclaimer in the documentation
 #    and/or other materials provided with the distribution.
@@ -71,7 +71,7 @@ def countBases(dnaStr):
 
 def getBaseCountString(dnaStr):
     numA, numC, numG, numT = countBases(dnaStr)
-    
+
     retVal = "{0} {1} {2} {3}"
     return retVal.format(numA, numC, numG, numT).strip()
 
@@ -82,7 +82,7 @@ def readStringFromFile(fileNameStr):
     f = open(fileNameStr)
     retVal = f.read().strip()
     f.close()
-   
+
     return retVal
 
 def dnaToRnaTranscription(dnaStr):
@@ -99,7 +99,7 @@ def dnaToRnaTranscription(dnaStr):
 def dnaReverseCompliment(dnaStr):
     compStr = []
     try:
-        for char in dnaStr.upper()[::-1]:        
+        for char in dnaStr.upper()[::-1]:
             if 'A' == char:
                 compStr.append('T')
             elif 'C' == char:

@@ -2,7 +2,7 @@
 # testRnaTranscription.py
 #
 # This file contains the tests for the RNA transcription problem
-# at http://rosalind.info/problems/as-table/ 
+# at http://rosalind.info/problems/as-table/
 # ID: RNA
 #
 # This code is distributed under the FreeBSD License
@@ -15,7 +15,7 @@
 #
 #    Redistributions of source code must retain the above copyright notice,
 #    this list of conditions and the following disclaimer.
-#    
+#
 #    Redistributions in binary form must reproduce the above copyright notice,
 #    this list of conditions and the following disclaimer in the documentation
 #    and/or other materials provided with the distribution.
@@ -54,17 +54,17 @@ class RnaTranscriptionTestClass(TestCase):
     def testDnaToRnaTranscriptionLowerCase(self):
         testStr = TEST_STR().lower()
         transStr = dnaStringLibrary.dnaToRnaTranscription(testStr)
-        
+
         self.assertEqual(EXPECTED_STR(), transStr)
 
     def testDnaToRnaTranscriptionNoneStr(self):
         testStr = 3.1415
-        self.assertRaises(dnaStringLibrary.InvalidDnaString, 
-                          dnaStringLibrary.dnaToRnaTranscription, 
+        self.assertRaises(dnaStringLibrary.InvalidDnaString,
+                          dnaStringLibrary.dnaToRnaTranscription,
                           testStr)
 
     def testDnaToRnaTranscriptionInvalidStr(self):
         testStr = "ACGU"
-        self.assertRaises(dnaStringLibrary.InvalidDnaString, 
-                          dnaStringLibrary.dnaToRnaTranscription, 
+        self.assertRaises(dnaStringLibrary.InvalidDnaString,
+                          dnaStringLibrary.dnaToRnaTranscription,
                           testStr)

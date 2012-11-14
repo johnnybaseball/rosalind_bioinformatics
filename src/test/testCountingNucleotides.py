@@ -2,7 +2,7 @@
 # testCountingNucleotides.py
 #
 # This file contains the tests for the counting nucleotides problem
-# at http://rosalind.info/problems/as-table/ 
+# at http://rosalind.info/problems/as-table/
 # ID: DNA
 #
 # This code is distributed under the FreeBSD License
@@ -15,7 +15,7 @@
 #
 #    Redistributions of source code must retain the above copyright notice,
 #    this list of conditions and the following disclaimer.
-#    
+#
 #    Redistributions in binary form must reproduce the above copyright notice,
 #    this list of conditions and the following disclaimer in the documentation
 #    and/or other materials provided with the distribution.
@@ -36,7 +36,7 @@
 
 from unittest import TestCase
 import dnaStringLibrary
-    
+
 def TEST_STR():
     return "AGCTTTTCATTCTGACTGCAACGGGCAATATGTCTCTGTGTGGATTAAAAAAAGAGTGTCTGATAGCAGC"
 
@@ -60,7 +60,7 @@ class CountingNucleotidesTestCase(TestCase):
         self.assertEqual(12,numC)
         self.assertEqual(17,numG)
         self.assertEqual(21,numT)
-    
+
     def testGetBaseCountString(self):
         self.assertEqual("20 12 17 21", dnaStringLibrary.getBaseCountString(TEST_STR()))
 
@@ -73,9 +73,9 @@ class CountingNucleotidesTestCase(TestCase):
         testStr = 3.1415
 
         self.assertRaises(dnaStringLibrary.InvalidDnaString, dnaStringLibrary.countBases, testStr)
-    
+
     def testNucleotideCountInvalidString(self):
         testStr = "ABC"
 
         self.assertRaises(dnaStringLibrary.InvalidDnaString, dnaStringLibrary.countBases, testStr)
-        
+

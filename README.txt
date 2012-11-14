@@ -3,16 +3,16 @@ website:
 http://rosalind.info/problems/as-table/
 
 I began using this project as a way to practice my Test Driven Development
-(TDD) and thought it might be worth sharing.  
+(TDD) and thought it might be worth sharing.
 
 The directory structure is the following:
 /src      <-- all the library files and the problem solution scripts
 /src/test <-- all the files for unit testing and a README on how to run them
 /data     <-- data files used in solving the problems
 
-All feedback, comments, and questions are welcome.  
+All feedback, comments, and questions are welcome.
 
-Thank you, 
+Thank you,
 John Secord
 
  This code is distributed under the FreeBSD License
@@ -25,7 +25,7 @@ John Secord
 
     Redistributions of source code must retain the above copyright notice,
     this list of conditions and the following disclaimer.
-    
+
     Redistributions in binary form must reproduce the above copyright notice,
     this list of conditions and the following disclaimer in the documentation
     and/or other materials provided with the distribution.
