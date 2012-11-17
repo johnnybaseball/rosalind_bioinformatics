@@ -37,6 +37,7 @@
 
 import os
 from os import path
+from cStringIO import StringIO
 
 class InvalidDnaString(Exception):
     """A custom exception for when an invalid DNA string is used"""
@@ -45,6 +46,12 @@ class InvalidDnaString(Exception):
     def __str__(self):
         return repr(self.value)
 
+class InvalidFastaString(Exception):
+    """A custom exception for when an invalid DNA string is used"""
+    def __init__(self,value):
+        self.value = value
+    def __str__(self):
+        return repr(self.value)
 
 def countBases(dnaStr):
     numA = 0
@@ -123,3 +130,52 @@ def verifyDnaString(dnaStr):
         retVal = False
 
     return retVal
+
+def parseFastaString(fastaStr):
+    """Function that parses a Rosalind FASTA text blob into key, value pairs
+
+    The key is the lable, e.g. Rosalind_6404 and the value would be the dna
+    string.  This returns a dictionary with the key, value pairs.
+    """
+    retVal = {}
+    
+    try:
+        strIo = StringIO(fastaStr)
+        tempDnaStrList = []
+        label = None
+        for line in strIo:
+            if '>' == line[0]:
+                if label:
+                    # Insert the string with the previous label, if None then
+                    # there should be no data yet
+                    retVal[label] = ''.join(tempDnaStrList)
+                
+                # Reset the temporary string
+                tempDnaStrList = []
+                
+                # Read the new label
+                label = line[1:].strip()
+                
+            else:
+                tempDnaStrList.append(line.strip())
+        # Insert last string
+        if label:
+            retVal[label] = ''.join(tempDnaStrList)
+    except Exception as e:
+        raise InvalidFastaString("Invalid FASTA string: {0}".format(fastaStr))
+
+    if 0 == len(retVal):
+        raise InvalidFastaString("Invalid FASTA string, no labels found: {0}".format(fastaStr))
+
+    return retVal
+
+
+def calcGcContent(dnaStr):
+    if not verifyDnaString(dnaStr):
+        raise InvalidDnaString("Invalid DNA string: {0}".format(dnaStr))
+
+    try:
+        return sum(base in ['G','C'] for base in dnaStr)/float(len(dnaStr))
+    except Exception:
+        raise InvalidDnaString("Invalid DNA string: {0}".format(dnaStr))
+
