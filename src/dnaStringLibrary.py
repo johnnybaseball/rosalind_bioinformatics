@@ -148,7 +148,7 @@ def parseFastaString(fastaStr):
                 if label:
                     # Insert the string with the previous label, if None then
                     # there should be no data yet
-                    retVal[label] = ''.join(tempDnaStrList)
+                    retVal[label] = ''.join(tempDnaStrList).upper()
                 
                 # Reset the temporary string
                 tempDnaStrList = []
@@ -160,7 +160,7 @@ def parseFastaString(fastaStr):
                 tempDnaStrList.append(line.strip())
         # Insert last string
         if label:
-            retVal[label] = ''.join(tempDnaStrList)
+            retVal[label] = ''.join(tempDnaStrList).upper()
     except Exception as e:
         raise InvalidFastaString("Invalid FASTA string: {0}".format(fastaStr))
 
@@ -178,4 +178,18 @@ def calcGcContent(dnaStr):
         return sum(base in ['G','C'] for base in dnaStr)/float(len(dnaStr))
     except Exception:
         raise InvalidDnaString("Invalid DNA string: {0}".format(dnaStr))
+
+
+def hammingDistance(dnaStrA, dnaStrB):
+    """Calculatings the Hamming distance
+
+    see http://en.wikipedia.org/wiki/Hamming_distance
+    """
+
+    assert(len(dnaStrA) == len(dnaStrB))
+    if not verifyDnaString(dnaStrA):
+        raise InvalidDnaString("Invalid DNA string: {0}".format(dnaStrA))
+    if not verifyDnaString(dnaStrB):
+        raise InvalidDnaString("Invalid DNA string: {0}".format(dnaStrB))
+    return sum(ch1 != ch2 for ch1, ch2 in zip(dnaStrA, dnaStrB))
 
