@@ -64,11 +64,6 @@ class CountingNucleotidesTestCase(TestCase):
     def testGetBaseCountString(self):
         self.assertEqual("20 12 17 21", dnaStringLibrary.getBaseCountString(TEST_STR()))
 
-    def testReadDnaStringFromFile(self):
-        strFileName = "test/testFile.txt"
-
-        self.assertEqual(TEST_STR(), dnaStringLibrary.readStringFromFile(strFileName))
-
     def testNucleotideCountNonString(self):
         testStr = 3.1415
 

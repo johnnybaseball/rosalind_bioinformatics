@@ -1,7 +1,8 @@
 #
-# runHamm.py
+# testFileIo.py
 #
-# Script that runs solution to HAMM problem
+# This file contains the tests for testing file io, specifically the 
+# file_io_lib.
 #
 # This code is distributed under the FreeBSD License
 #
@@ -31,25 +32,40 @@
 # POSSIBILITY OF SUCH DAMAGE.
 #
 ##############################################################################
-from dnaStringLibrary import hammingDistance
-from dnaStringLibrary import InvalidDnaString
-from file_io_lib import readStringFromFile
 
+from unittest import TestCase
+import file_io_lib
 
-def calcNumPointMutations(twoStrings):
-    """Given two DNA strings seperated by a new line, find Hamming distance"""
-    
-    dnaStrA, dnaStrB = twoStrings.split('\n')
+def TEST_STR():
+    return "AGCTTTTCATTCTGACTGCAACGGGCAATATGTCTCTGTGTGGATTAAAAAAAGAGTGTCTGATAGCAGC"
 
-    return hammingDistance(dnaStrA, dnaStrB)
+def FILE_1():
+    return "test/testFile.txt"
 
+def FILE_2():
+    return "test/testFile2.txt"
 
-def main():
-    testStr = readStringFromFile("../data/hamm.txt")
-    
-    print(calcNumPointMutations(testStr))
-    
-if __name__ == "__main__":
-    main()
+def LINES_IN_FILE_2():
+    return 6;
 
+def EXPECTED_FILE_LIST():
+    return ["Line 1",
+            "Line 2",
+            "Line 3",
+            "",
+            "Line 5",
+            "Line 6"]
 
+class FileIOTestCase(TestCase):
+
+    def testReadStringFromFile(self):
+        self.assertEqual(TEST_STR(), file_io_lib.readStringFromFile(FILE_1()))
+
+    def testBuildListFromFile(self):
+        fileList = file_io_lib.readFileToList(FILE_2())
+
+        self.assertEqual(LINES_IN_FILE_2(), len(fileList))
+        self.assertEqual(EXPECTED_FILE_LIST(), fileList)
+
+    def testBadFileName(self):
+        self.assertRaises(IOError, file_io_lib.readFileToList, "bad_file_name")

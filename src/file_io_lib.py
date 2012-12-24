@@ -1,7 +1,7 @@
 #
-# runHamm.py
+# file_io_lib.py
 #
-# Script that runs solution to HAMM problem
+# This file contains a number of function for performing common file io tasks
 #
 # This code is distributed under the FreeBSD License
 #
@@ -31,25 +31,24 @@
 # POSSIBILITY OF SUCH DAMAGE.
 #
 ##############################################################################
-from dnaStringLibrary import hammingDistance
-from dnaStringLibrary import InvalidDnaString
-from file_io_lib import readStringFromFile
 
+import os
+from os import path
 
-def calcNumPointMutations(twoStrings):
-    """Given two DNA strings seperated by a new line, find Hamming distance"""
-    
-    dnaStrA, dnaStrB = twoStrings.split('\n')
+def readStringFromFile(fileNameStr):
+    if not path.exists(fileNameStr) or not path.isfile(fileNameStr):
+        raise TypeError("File name is invalid: " + repr(fileNameStr))
 
-    return hammingDistance(dnaStrA, dnaStrB)
+    f = open(fileNameStr)
+    retVal = f.read().strip()
+    f.close()
 
+    return retVal
 
-def main():
-    testStr = readStringFromFile("../data/hamm.txt")
-    
-    print(calcNumPointMutations(testStr))
-    
-if __name__ == "__main__":
-    main()
+def readFileToList(fileNameStr):
+    f = open(fileNameStr)
+    fileList = []
+    for line in f:
+        fileList.append(line.strip())
 
-
+    return fileList

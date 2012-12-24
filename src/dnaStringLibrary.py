@@ -36,8 +36,10 @@
 ##############################################################################
 
 import os
+import re
 from os import path
 from cStringIO import StringIO
+
 
 class InvalidDnaString(Exception):
     """A custom exception for when an invalid DNA string is used"""
@@ -81,16 +83,6 @@ def getBaseCountString(dnaStr):
 
     retVal = "{0} {1} {2} {3}"
     return retVal.format(numA, numC, numG, numT).strip()
-
-def readStringFromFile(fileNameStr):
-    if not path.exists(fileNameStr) or not path.isfile(fileNameStr):
-        raise TypeError("File name is invalid: " + repr(fileNameStr))
-
-    f = open(fileNameStr)
-    retVal = f.read().strip()
-    f.close()
-
-    return retVal
 
 def dnaToRnaTranscription(dnaStr):
     try:
@@ -181,7 +173,7 @@ def calcGcContent(dnaStr):
 
 
 def hammingDistance(dnaStrA, dnaStrB):
-    """Calculatings the Hamming distance
+    """Calculates the Hamming distance
 
     see http://en.wikipedia.org/wiki/Hamming_distance
     """
@@ -193,3 +185,15 @@ def hammingDistance(dnaStrA, dnaStrB):
         raise InvalidDnaString("Invalid DNA string: {0}".format(dnaStrB))
     return sum(ch1 != ch2 for ch1, ch2 in zip(dnaStrA, dnaStrB))
 
+
+def findDnaSubstring(dnaString, dnaSubstring):
+    """Simple function to match a string using regular expressions"""
+    
+    res = []
+    regexObj = re.compile(dnaSubstring)
+    matchObj = regexObj.search(dnaString, 0)
+    while matchObj:
+        res.append(matchObj.start()+1)
+        matchObj = regexObj.search(dnaString, matchObj.start()+1) # one indexed
+
+    return res

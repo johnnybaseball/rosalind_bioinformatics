@@ -34,7 +34,7 @@
 #
 ##############################################################################
 
-from dnaStringLibrary import readStringFromFile 
+from file_io_lib import readStringFromFile 
 from dnaStringLibrary import calcGcContent
 from dnaStringLibrary import parseFastaString
 from dnaStringLibrary import InvalidFastaString

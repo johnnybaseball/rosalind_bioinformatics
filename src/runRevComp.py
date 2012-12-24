@@ -34,7 +34,7 @@
 import dnaStringLibrary
 
 try:
-    dnaStr = dnaStringLibrary.readStringFromFile("../data/revc.txt")
+    dnaStr = file_io_lib.readStringFromFile("../data/revc.txt")
 
     print(dnaStringLibrary.dnaReverseCompliment(dnaStr))
 

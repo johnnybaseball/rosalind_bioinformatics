@@ -1,7 +1,7 @@
 #
-# runHamm.py
+# runSubs.py
 #
-# Script that runs solution to HAMM problem
+# Script that runs solution to SUBS problem
 #
 # This code is distributed under the FreeBSD License
 #
@@ -31,25 +31,26 @@
 # POSSIBILITY OF SUCH DAMAGE.
 #
 ##############################################################################
-from dnaStringLibrary import hammingDistance
-from dnaStringLibrary import InvalidDnaString
-from file_io_lib import readStringFromFile
+import dnaStringLibrary
+import file_io_lib
+
+def FILE_INPUT():
+    #return "../data/substring2.test"
+    return "../data/rosalind_subs2.txt"
+
+def generateOutput(fileName):
+    lines = file_io_lib.readFileToList(fileName)
+
+    res = dnaStringLibrary.findDnaSubstring(lines[0], lines[1]);
+    res = (''.join([str(num)+' ' for num in res]).strip())
+
+    return res
+
+try:
+    #Write code to read file format
+    print(generateOutput(FILE_INPUT()))
 
 
-def calcNumPointMutations(twoStrings):
-    """Given two DNA strings seperated by a new line, find Hamming distance"""
-    
-    dnaStrA, dnaStrB = twoStrings.split('\n')
-
-    return hammingDistance(dnaStrA, dnaStrB)
-
-
-def main():
-    testStr = readStringFromFile("../data/hamm.txt")
-    
-    print(calcNumPointMutations(testStr))
-    
-if __name__ == "__main__":
-    main()
-
+except Exception as e:
+    print("Failed to run script: " + repr(e))
 

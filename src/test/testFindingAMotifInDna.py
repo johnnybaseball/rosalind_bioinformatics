@@ -1,7 +1,9 @@
 #
-# runHamm.py
+# testFindingAMotifInDna.py
 #
-# Script that runs solution to HAMM problem
+# This file contains the tests for the finding a motif in DNA problem
+# at http://rosalind.info/problems/as-table/
+# ID: SUBS
 #
 # This code is distributed under the FreeBSD License
 #
@@ -31,25 +33,48 @@
 # POSSIBILITY OF SUCH DAMAGE.
 #
 ##############################################################################
-from dnaStringLibrary import hammingDistance
-from dnaStringLibrary import InvalidDnaString
-from file_io_lib import readStringFromFile
 
 
-def calcNumPointMutations(twoStrings):
-    """Given two DNA strings seperated by a new line, find Hamming distance"""
-    
-    dnaStrA, dnaStrB = twoStrings.split('\n')
+from unittest import TestCase
+from dnaStringLibrary import findDnaSubstring 
+import runSubs
 
-    return hammingDistance(dnaStrA, dnaStrB)
+def TEST_STR():
+    return "ACGTACGTACGTACGT"
+
+def TEST_MOTIF():
+    return "GTA"
+
+def TEST_FILE():
+    return "../data/substring.test"
+
+def EXPECTED_RESULT():
+    return [3,7,11]
+
+def TEST_STRING_OVERLAP():
+    return "GATATATGCATATACTT"
+
+def TEST_MOTIF_OVERLAP():
+    return "ATAT"
+
+def EXPECTED_RESULT_OVERLAP():
+    return [2,4,10]
+
+def EXPECTED_STRING():
+    return "3 7 11"
+
+class FindingAMotifInDnaTestCase(TestCase):
 
 
-def main():
-    testStr = readStringFromFile("../data/hamm.txt")
-    
-    print(calcNumPointMutations(testStr))
-    
-if __name__ == "__main__":
-    main()
+    def testFindingSubstrings(self):
+        res = findDnaSubstring(TEST_STR(), TEST_MOTIF())
 
+        self.assertEqual(EXPECTED_RESULT(), res)
 
+    def testFindingOverlappingSubstrings(self):
+        res = findDnaSubstring(TEST_STRING_OVERLAP(), TEST_MOTIF_OVERLAP())
+
+        self.assertEqual(EXPECTED_RESULT_OVERLAP(), res)
+
+    def testGeneratingOutput(self):
+        self.assertEqual(EXPECTED_STRING(),runSubs.generateOutput(TEST_FILE()))

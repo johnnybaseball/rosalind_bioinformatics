@@ -34,7 +34,7 @@
 import dnaStringLibrary
 
 try:
-    testStr = dnaStringLibrary.readStringFromFile("../data/rna.txt")
+    testStr = file_io_lib.readStringFromFile("../data/rna.txt")
 
     print(dnaStringLibrary.dnaToRnaTranscription(testStr))
 

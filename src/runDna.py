@@ -34,7 +34,7 @@
 import dnaStringLibrary
 
 try:
-    testStr = dnaStringLibrary.readStringFromFile("../data/dna.txt")
+    testStr = file_io_lib.readStringFromFile("../data/dna.txt")
 
     print(dnaStringLibrary.getBaseCountString(testStr))
 
